@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollements', function (Blueprint $table) {
-            $table -> id();
-            $table->unsignedBigInteger('student_id'); // FK -> users
-            $table->unsignedBigInteger('group_id');   // FK -> groups
-            $table->unsignedBigInteger('course_id');  // FK -> courses
-            $table->timestamps();
+       Schema::create('enrollments', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('student_id');
+    $table->unsignedBigInteger('group_id');
+    $table->unsignedBigInteger('course_id');
+    $table->timestamps();
 
-    // FK
     $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
     $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
     $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-
-        });
+});
     }
 
     /**
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollements');
+        Schema::dropIfExists('enrollments');
     }
 };
